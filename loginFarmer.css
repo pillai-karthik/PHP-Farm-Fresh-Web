@@ -1,0 +1,108 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: url(assets/loginCustomerBg.jpg);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    font-family: 'Oxygen', sans-serif;
+    letter-spacing: 1px;
+}
+.login-box {
+    width: 700px;
+    height: 300px;
+    background: rgba(19, 89, 76, 0.4);
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    border-radius: 3px;
+}
+.login-box .form_c,
+.login-box .login_form{
+    position: relative;
+    width: 50%;
+    height: 300px;
+    float: left;
+    box-sizing: border-box;
+}
+.login-box .login_form{
+    background: #fff;
+    height: 330px;
+    top: -15px;
+    box-shadow: -20px 15px 15px rgba(0,0,0,0.2);
+    border-radius: 3px;
+    padding: 10px 30px;
+}
+.login-box .form_c{
+    padding: 10px 20px;
+    color: #fff;
+}
+.login-box .form_c a{
+    display: inline-block;
+    padding: 10px 50px;
+    color: #fff;
+    text-decoration: none;
+    background: #14594C;
+    border-radius: 25px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+.login-box .login_form h1{
+    color: #262626;
+}
+.login-box .login_form input{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 15px;
+}
+.login-box .login_form input:hover,
+.login-box .login_form input:valid{
+    border: 2px solid #14594C;
+} 
+.login-box .login_form input[type = "submit"]{
+    color: #fff;
+    border-radius: 25px;
+    background: #14594C;
+    font-size: 16px;
+    transition: 0.5s;
+}
+.login-box .login_form input[type = "submit"]:hover{
+    background: #A2A638;
+    border: 2px solid #A2A638;
+}
+.login-box .login_form a{
+    text-decoration: none;
+    font-weight: bold;
+    color:#14594C;
+    letter-spacing: 0px;
+}
+.login-box .login_form .sign a{
+    display: inline-block;
+    padding: 10px 20px;
+    left: 50%;
+    color: #fff;
+    text-decoration: none;
+    background: #14594C;
+    border-radius: 25px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    margin-top: 10px;
+}
+.login-box .login_form .img{
+    position: absolute;
+    left: 80%;
+    top: 10px;
+    display: inline-block;
+}
+
+#errorPara{
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+}

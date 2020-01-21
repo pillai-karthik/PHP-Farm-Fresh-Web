@@ -1,0 +1,15 @@
+.number{
+  width:50px;
+  height: 36px;
+  background-color: white;
+  border-color: grey;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.add_sub{
+  margin-top: 20px;
+  
+}
+
+

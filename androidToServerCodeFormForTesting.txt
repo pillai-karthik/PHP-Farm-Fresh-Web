@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>form</title>
+</head>
+<body>
+	<form method="POST">
+		<input type="text" name="phone" placeholder="phone">
+		<input type="text" name="message" placeholder="message">
+		<input type="submit" name="">
+	</form>
+
+</body>
+</html>
