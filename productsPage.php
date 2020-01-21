@@ -29,6 +29,7 @@
   <script>
     function onchangeAdd(productId){
       document.getElementById('numberr'+productId).stepUp(1);
+      var i=0;
     }
 
 
