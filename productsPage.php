@@ -28,16 +28,21 @@
 
   <script>
     function onchangeAdd(productId){
-      document.getElementById('numberr'+productId).stepUp(1);
-      var i=0;
+      var x=document.getElementById('numberr'+productId).textContent;
+      var y=Number(x);
+      y=y+1;
+      document.getElementById('numberr'+productId).textContent=y;
     }
 
 
     function onchangeSubtract(productId){
-      if(document.getElementById('numberr'+productId).value==0){
-        document.getElementById('numberr'+productId).value=0;
+      if(document.getElementById('numberr'+productId).textContent=="0"){
+        //document.getElementById('numberr'+productId).value=0;
       }else{
-        document.getElementById('numberr'+productId).stepDown(1);
+        var x=document.getElementById('numberr'+productId).textContent;
+        var y=Number(x);
+        y=y-1;
+        document.getElementById('numberr'+productId).textContent=y;
       }
     }
   </script>
@@ -152,22 +157,6 @@
                     <h5 class=\"card-title\">$productName</h5>
                     <h6 class=\"card-title\">Rs.$pricePerKg/kg</h6>
                     <p class=\"card-text\">Sold By, $farmerName.</p>
-                    <div align=\"center\" class=\"text-center add_sub\">
-                      <button class=\"btn btn-danger btn_1\" onclick=\"onchangeSubtract($productId)\"><b>-</b></button>
-                      <input type=\"number\" class=\"number \" disabled id=\"numberr$productId\" value=\"0\">
-                      <button class=\"btn btn-success btn_2\" onclick=\"onchangeAdd($productId)\"><b>+</b></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class=\"col-lg-3 col-md-4 col-sm-6\">
-                <div class=\"card\">
-                  <img class=\"card-img-top\" src=\"productImages/$productName.png\" alt=\"Card image cap\">
-                  <div class=\"card-body\">
-                    <h5 class=\"card-title\">$productName</h5>
-                    <h6 class=\"card-title\">Rs.$pricePerKg per Kilogram</h6>
-                    <p class=\"card-text\">Sold By, $farmerName.</p>
 
                         <div class=\"input-group mb-3 plusminusgroup\">
                           <div class=\"input-group-prepend\">
@@ -177,7 +166,8 @@
                           <div class=\"input-group-prepend\">
                             <button class=\"btn btn-danger btn_1\" onclick=\"onchangeSubtract($productId)\"><b>-</b></button>
 
-                            <span type=\"number\" class=\"input-group-text\" id=\"numberr$productId\" value=\"10\">0</span>
+                            <span class=\"input-group-text\" id=\"numberr$productId\">0</span>
+
                           </div>
 
                           <div class=\"input-group-append\">
@@ -196,20 +186,22 @@
         }
       ?>
 
-<!-- ///////////////////////////////////////TO TRY -->
-  <div class="col-lg-3 col-md-4 col-sm-6">
+<!-- ///////////////////////////////////////TO TRY/////////////////////////////////////// -->
+
+<!--   <div class="col-lg-3 col-md-4 col-sm-6">
     <div class="card">
       <img class="card-img-top" src="productImages/tomato.png" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">$productName</h5>
-        <h6 class="card-title">Rs.$pricePerKg per Kilogram</h6>
+        <h6 class="card-title">Rs.$pricePerKg/kg</h6>
         <p class="card-text">Sold By, $farmerName.</p>
 
             <div class="input-group mb-3 plusminusgroup">
+
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Qty (Kgs)</span>
               </div>
-
+              
               <div class="input-group-prepend">
                 <button class="btn btn-danger btn_1" onclick="onchangeSubtract($productId)"><b>-</b></button>
 
@@ -219,12 +211,13 @@
               <div class="input-group-append">
                 <button class="btn btn-success btn_2" onclick="onchangeAdd($productId)"><b>+</b></button>
               </div>
+
             </div>
       </div>
     </div>  
-  </div>
+  </div> -->
 
-<!-- ///////////////////////////////////////TO TRY -->
+<!-- ///////////////////////////////////////TO TRY/////////////////////////////////////// -->
 
 
 
