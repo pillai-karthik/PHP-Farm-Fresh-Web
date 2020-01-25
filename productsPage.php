@@ -161,6 +161,33 @@
                 </div>
               </div>
 
+              <div class=\"col-lg-3 col-md-4 col-sm-6\">
+                <div class=\"card\">
+                  <img class=\"card-img-top\" src=\"productImages/$productName.png\" alt=\"Card image cap\">
+                  <div class=\"card-body\">
+                    <h5 class=\"card-title\">$productName</h5>
+                    <h6 class=\"card-title\">Rs.$pricePerKg per Kilogram</h6>
+                    <p class=\"card-text\">Sold By, $farmerName.</p>
+
+                        <div class=\"input-group mb-3 plusminusgroup\">
+                          <div class=\"input-group-prepend\">
+                            <span class=\"input-group-text\" id=\"basic-addon1\">Qty (Kgs)</span>
+                          </div>
+
+                          <div class=\"input-group-prepend\">
+                            <button class=\"btn btn-danger btn_1\" onclick=\"onchangeSubtract($productId)\"><b>-</b></button>
+
+                            <span type=\"number\" class=\"input-group-text\" id=\"numberr$productId\" value=\"10\">0</span>
+                          </div>
+
+                          <div class=\"input-group-append\">
+                            <button class=\"btn btn-success btn_2\" onclick=\"onchangeAdd($productId)\"><b>+</b></button>
+                          </div>
+                        </div>
+                  </div>
+                </div>  
+              </div>
+
             ";
             echo $str;
             
@@ -169,7 +196,7 @@
         }
       ?>
 
-
+<!-- ///////////////////////////////////////TO TRY -->
   <div class="col-lg-3 col-md-4 col-sm-6">
     <div class="card">
       <img class="card-img-top" src="productImages/tomato.png" alt="Card image cap">
@@ -177,19 +204,27 @@
         <h5 class="card-title">$productName</h5>
         <h6 class="card-title">Rs.$pricePerKg per Kilogram</h6>
         <p class="card-text">Sold By, $farmerName.</p>
-        <a href="shoppingCart.php" class="btn btn-outline-success btn-lg btn-block" >
-        <b>Add to cart</b></a>
-        <div align="center" class="text-center add_sub">
-          <button class="btn btn-danger btn_1" onclick="onchangeSubtract()"><b>-</b></button>
-          <input type="number" class="number " disabled id="numberr" value="0">
-          <button class="btn btn-success btn_2" onclick="onchangeAdd()"><b>+</b></button>
-        </div>
-      </div>
 
+            <div class="input-group mb-3 plusminusgroup">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Qty (Kgs)</span>
+              </div>
+
+              <div class="input-group-prepend">
+                <button class="btn btn-danger btn_1" onclick="onchangeSubtract($productId)"><b>-</b></button>
+
+                <span class="input-group-text" id="numberr$productId">0</span>
+              </div>
+
+              <div class="input-group-append">
+                <button class="btn btn-success btn_2" onclick="onchangeAdd($productId)"><b>+</b></button>
+              </div>
+            </div>
+      </div>
     </div>  
   </div>
 
-
+<!-- ///////////////////////////////////////TO TRY -->
 
 
 
