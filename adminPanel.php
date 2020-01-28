@@ -236,7 +236,7 @@ if(isset($_GET['toview'])){
 				                    <h6 class=\"card-title\">Price : Rs.$pricePerKg/Kg</h6>
 				                    <h6 class=\"card-title\">Available : $quantityInKg Kilograms</h6>
 				                    <h6 class=\"card-title\">Farmer : $farmerName</h6>
-				                    <a href=\"#\" class=\"btn btn-outline-success btn-lg btn-block\"><b>View</b></a>
+				                    <a href=\"adminViewSingleProduct.php?productid=$productId\" class=\"btn btn-outline-success btn-lg btn-block\"><b>View</b></a>
 				                  </div>
 				                </div>
 				              </div>
@@ -275,7 +275,7 @@ if(isset($_GET['toview'])){
 				                    <h6 class=\"card-title\">Price : Rs.$pricePerKg/Kg</h6>
 				                    <h6 class=\"card-title\">Available : $quantityInKg Kilograms</h6>
 				                    <h6 class=\"card-title\">Farmer : $farmerName</h6>
-				                    <a href=\"#\" class=\"btn btn-outline-success btn-lg btn-block\"><b>View</b></a>
+				                    <a href=\"adminViewSingleProduct.php?productid=$productId\" class=\"btn btn-outline-success btn-lg btn-block\"><b>View</b></a>
 				                  </div>
 				                </div>
 				              </div>
@@ -314,7 +314,7 @@ if(isset($_GET['toview'])){
 				                    <h6 class=\"card-title\">Price : Rs.$pricePerKg/Kg</h6>
 				                    <h6 class=\"card-title\">Available : $quantityInKg Kilograms</h6>
 				                    <h6 class=\"card-title\">Farmer : $farmerName</h6>
-				                    <a href=\"#\" class=\"btn btn-outline-success btn-lg btn-block\"><b>View</b></a>
+				                    <a href=\"adminViewSingleProduct.php?productid=$productId\" class=\"btn btn-outline-success btn-lg btn-block\"><b>View</b></a>
 				                  </div>
 				                </div>
 				              </div>

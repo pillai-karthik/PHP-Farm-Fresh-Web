@@ -1,0 +1,20 @@
+.navbtn{
+	margin-right: 10px;
+	margin-top: 5px;
+}
+
+.productImage{
+	max-width: 250px;
+}
+
+.containerOfProductDetails{
+	margin: 20px auto;
+	max-width: 500px;
+	border:black 5px solid;
+	padding: 20px;
+	border-radius: 15px;
+}
+
+.input-group{
+	margin-top: 5px;
+}
