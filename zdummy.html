@@ -1,30 +1,13 @@
-<div class="col-lg-3 col-md-4 col-sm-6">
-    <div class="card">
-      <img class="card-img-top" src="productImages/tomato.png" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">$productName</h5>
-        <h6 class="card-title">Rs.$pricePerKg per Kilogram</h6>
-        <p class="card-text">Sold By, $farmerName.</p>
-
-            <div class="input-group mb-3 plusminusgroup">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Qty (Kgs)</span>
-              </div>
-
-              <div class="input-group-prepend">
-                <button class="btn btn-danger btn_1" onclick="onchangeSubtract($productId)"><b>-</b></button>
-
-                <span class="input-group-text" id="numberr$productId">0</span>
-              </div>
-
-              <div class="input-group-append">
-                <button class="btn btn-success btn_2" onclick="onchangeAdd($productId)"><b>+</b></button>
-              </div>
-              Its danish here ... 
-            </div>
-      </div>
-    </div>  
-  </div>
-<p> Dhiren Here </p>
-<p> checking </p>
-<p> Parth ka productpagelist branch he </p>
+<nav class="navbar navbar-light bg-light">
+  <form class="form-inline">
+    <a href="adminPanel.php?toview=allproducts">
+      <button class="btn btn-outline-success navbtn active" type="button">All Products</button>
+    </a>
+    <a href="adminPanel.php?toview=unverifiedproducts">
+      <button class="btn btn-outline-success navbtn" type="button">Un-verified Products</button>
+  </a>
+  <a href="adminPanel.php?toview=verifiedproducts">
+      <button class="btn btn-outline-success navbtn" type="button">Verified Products</button>
+    </a>
+  </form>
+</nav>
