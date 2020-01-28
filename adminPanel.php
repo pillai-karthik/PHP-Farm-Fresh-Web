@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="vendors/Magnific-Popup/magnific-popup.css">
 
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" type="text/css" href="productsPage.css">
+  <link rel="stylesheet" type="text/css" href="adminPanel.css">
 </head>
 <body>
 
@@ -51,7 +51,7 @@
             <ul class="nav navbar-nav menu_nav justify-content-end">
               <li class="nav-item <?php if($_GET['toview']=="farmers"){echo "active";}?>"><a href="adminPanel.php?toview=farmers" class="nav-link" >Farmers</a></li>
               <li class="nav-item <?php if($_GET['toview']=="customers"){echo "active";}?>"><a href="adminPanel.php?toview=customers" class="nav-link" >Customers</a></li>  
-              <li class="nav-item <?php if($_GET['toview']=="products"){echo "active";}?>"><a href="adminPanel.php?toview=products" class="nav-link" >Products</a></li> 
+              <li class="nav-item <?php if($_GET['toview']=="products"){echo "active";}?>"><a href="adminPanel.php?toview=allproducts" class="nav-link" >Products</a></li> 
               
               <?php
                 if(isset($_SESSION['adminName'])){
@@ -67,6 +67,67 @@
     </div>
   </header>
   <!--================Header Menu Area =================-->
+<?php
+
+if(isset($_GET['toview'])){
+	$toview=$_GET['toview'];
+
+	if ($toview=="allproducts") {
+		$str="
+			<nav class=\"navbar navbar-light bg-light\">
+			  <form class=\"form-inline\">
+			    <a href=\"adminPanel.php?toview=allproducts\">
+			      <button class=\"btn btn-outline-success navbtn active\" type=\"button\">All Products</button>
+			    </a>
+			    <a href=\"adminPanel.php?toview=unverifiedproducts\">
+			      <button class=\"btn btn-outline-success navbtn\" type=\"button\">Un-verified Products</button>
+			  </a>
+			  <a href=\"adminPanel.php?toview=verifiedproducts\">
+			      <button class=\"btn btn-outline-success navbtn\" type=\"button\">Verified Products</button>
+			    </a>
+			  </form>
+			</nav>
+		";
+		echo $str;
+	}elseif ($toview=="verifiedproducts") {
+		$str="
+			<nav class=\"navbar navbar-light bg-light\">
+			  <form class=\"form-inline\">
+			    <a href=\"adminPanel.php?toview=allproducts\">
+			      <button class=\"btn btn-outline-success navbtn\" type=\"button\">All Products</button>
+			    </a>
+			    <a href=\"adminPanel.php?toview=unverifiedproducts\">
+			      <button class=\"btn btn-outline-success navbtn\" type=\"button\">Un-verified Products</button>
+			  </a>
+			  <a href=\"adminPanel.php?toview=verifiedproducts\">
+			      <button class=\"btn btn-outline-success navbtn active\" type=\"button\">Verified Products</button>
+			    </a>
+			  </form>
+			</nav>
+		";
+		echo $str;
+	}elseif ($toview=="unverifiedproducts") {
+		$str="
+			<nav class=\"navbar navbar-light bg-light\">
+			  <form class=\"form-inline\">
+			    <a href=\"adminPanel.php?toview=allproducts\">
+			      <button class=\"btn btn-outline-success navbtn\" type=\"button\">All Products</button>
+			    </a>
+			    <a href=\"adminPanel.php?toview=unverifiedproducts\">
+			      <button class=\"btn btn-outline-success navbtn active\" type=\"button\">Un-verified Products</button>
+			  </a>
+			  <a href=\"adminPanel.php?toview=verifiedproducts\">
+			      <button class=\"btn btn-outline-success navbtn\" type=\"button\">Verified Products</button>
+			    </a>
+			  </form>
+			</nav>
+		";
+		echo $str;
+	}
+}
+
+?>
+
 
 <div class="container">
     <div class="row">
@@ -144,8 +205,86 @@
 		          			";
 		          			echo $str;
 		          		}
-		        	}elseif ($toview=="products") {
+		        	}elseif ($toview=="allproducts") {
 		        		$query="SELECT * FROM products ORDER BY id DESC";
+				          $result=mysqli_query($link,$query);
+
+				          while ($row=mysqli_fetch_array($result)) {
+				            $productId=$row['id'];
+				            $farmerId=$row['farmerid'];
+				            $productName=$row['productname'];
+				            $quantityInKg=$row['quantityinkg'];
+				            $pricePerKg=$row['priceperkg'];
+				            $verified=$row['verified'];
+
+				            $queryForFarmerName="SELECT * FROM farmers WHERE id=".$farmerId;
+				            $resultForFarmerName=mysqli_query($link,$queryForFarmerName);
+
+				            $farmerName="Farmer";
+				            if(mysqli_num_rows($result)>0){
+				              $rowForFarmerName=mysqli_fetch_array($resultForFarmerName);
+				              $farmerName=$rowForFarmerName['name'];
+				            }
+
+				            $str="
+
+				              <div class=\"col-lg-3 col-md-4 col-sm-6\">
+				                <div class=\"card\">
+				                  <img class=\"card-img-top\" src=\"productImages/$productName.png\" alt=\"Card image cap\">
+				                  <div class=\"card-body\">
+				                    <h5 class=\"card-title\">$productName</h5>
+				                    <h6 class=\"card-title\">Price : Rs.$pricePerKg/Kg</h6>
+				                    <h6 class=\"card-title\">Available : $quantityInKg Kilograms</h6>
+				                    <h6 class=\"card-title\">Farmer : $farmerName</h6>
+				                    <a href=\"#\" class=\"btn btn-outline-success btn-lg btn-block\"><b>View</b></a>
+				                  </div>
+				                </div>
+				              </div>
+
+				            ";
+				            echo $str;
+				          }
+		        	}elseif ($toview=="verifiedproducts") {
+		        		$query="SELECT * FROM products WHERE verified =1 ORDER BY id DESC";
+				          $result=mysqli_query($link,$query);
+
+				          while ($row=mysqli_fetch_array($result)) {
+				            $productId=$row['id'];
+				            $farmerId=$row['farmerid'];
+				            $productName=$row['productname'];
+				            $quantityInKg=$row['quantityinkg'];
+				            $pricePerKg=$row['priceperkg'];
+				            $verified=$row['verified'];
+
+				            $queryForFarmerName="SELECT * FROM farmers WHERE id=".$farmerId;
+				            $resultForFarmerName=mysqli_query($link,$queryForFarmerName);
+
+				            $farmerName="Farmer";
+				            if(mysqli_num_rows($result)>0){
+				              $rowForFarmerName=mysqli_fetch_array($resultForFarmerName);
+				              $farmerName=$rowForFarmerName['name'];
+				            }
+
+				            $str="
+
+				              <div class=\"col-lg-3 col-md-4 col-sm-6\">
+				                <div class=\"card\">
+				                  <img class=\"card-img-top\" src=\"productImages/$productName.png\" alt=\"Card image cap\">
+				                  <div class=\"card-body\">
+				                    <h5 class=\"card-title\">$productName</h5>
+				                    <h6 class=\"card-title\">Price : Rs.$pricePerKg/Kg</h6>
+				                    <h6 class=\"card-title\">Available : $quantityInKg Kilograms</h6>
+				                    <h6 class=\"card-title\">Farmer : $farmerName</h6>
+				                    <a href=\"#\" class=\"btn btn-outline-success btn-lg btn-block\"><b>View</b></a>
+				                  </div>
+				                </div>
+				              </div>
+
+				            ";
+				            echo $str;
+				          }
+		        	}elseif ($toview=="unverifiedproducts") {
+		        		$query="SELECT * FROM products WHERE verified =0 ORDER BY id DESC";
 				          $result=mysqli_query($link,$query);
 
 				          while ($row=mysqli_fetch_array($result)) {
