@@ -86,57 +86,101 @@
   </form>
 </nav>
 
+<?php
+
+  include 'dataBaseConstants.php';
+  $link=mysqli_connect('localhost',$user,$pass,$db);
+
+  if(mysqli_connect_error()){
+    $error="There was an error connecting to DB!";
+  }else{
+    //CONNECTED TO DB SUCCESFULLY
+    $productId=$_GET['productid'];
+    $query="SELECT * FROM products WHERE id=$productId ORDER BY id DESC";
+    $result=mysqli_query($link,$query);
+
+    $row=mysqli_fetch_array($result);
+
+    $farmerId=$row['farmerid'];
+    $productName=$row['productname'];
+    $quantityInKg=$row['quantityinkg'];
+    $pricePerKg=$row['priceperkg'];
+    $productGrade=$row['grade'];
+    $productVerifyStatus=$row['verified'];
+
+    $queryForFarmer="SELECT * FROM farmers WHERE id=".$farmerId;
+    $resultForFarmer=mysqli_query($link,$queryForFarmer);
+
+    $rowForFarmer=mysqli_fetch_array($resultForFarmer);
+
+    $farmerName=$rowForFarmer['name'];
+    $farmerPhone=$rowForFarmer['phone'];
+    $farmerLocation=$rowForFarmer['location'];
+    $farmerVerifyStatus=$rowForFarmer['verified'];
+
+  }
+
+
+?>
+
 
 <div class="containerOfProductDetails">
 
   <h3><u>Product details :</u></h3>
+
   <div class="text-center">
-    <img src="productImages/onion.png" class="rounded productImage" alt="...">
+    <img src="productImages/<?php echo $productName ?>.png" class="rounded productImage" alt="...">
   </div>
 
   <div class="input-group flex-nowrap">
     <div class="input-group-prepend">
       <span class="input-group-text" id="addon-wrapping">Product ID</span>
     </div>
-    <input type="text" class="form-control" placeholder="0" aria-label="Username" aria-describedby="addon-wrapping" disabled="true">
+    <input type="text" class="form-control" placeholder="0" aria-label="Username" aria-describedby="addon-wrapping" disabled="true" value="<?php echo $productId ?>">
   </div>
 
   <div class="input-group flex-nowrap">
     <div class="input-group-prepend">
       <span class="input-group-text" id="addon-wrapping">Product Name</span>
     </div>
-    <input type="text" class="form-control" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="XYZ">
+    <input type="text" class="form-control" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="<?php echo $productName ?>">
   </div>
 
   <div class="input-group flex-nowrap">
     <div class="input-group-prepend">
       <span class="input-group-text" id="addon-wrapping">Quantity (Kgs)</span>
     </div>
-    <input type="text" class="form-control" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="0">
+    <input type="text" class="form-control" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="<?php echo $quantityInKg ?>">
   </div>
 
   <div class="input-group flex-nowrap">
     <div class="input-group-prepend">
       <span class="input-group-text" id="addon-wrapping">Price per Kg</span>
     </div>
-    <input type="text" class="form-control" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="0">
+    <input type="text" class="form-control" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="<?php echo $pricePerKg ?>">
   </div>
 
   <div class="input-group flex-nowrap">
     <div class="input-group-prepend">
       <span class="input-group-text" id="addon-wrapping">Grade</span>
     </div>
-    <input type="text" class="form-control" placeholder="A" aria-label="Username" aria-describedby="addon-wrapping" value="A">
+    <input type="text" class="form-control" placeholder="Null" aria-label="Username" aria-describedby="addon-wrapping" value="<?php echo $productGrade ?>">
 
   </div>
   
 
   <div class="input-group flex-nowrap">
     <div class="input-group-prepend">
-      <span class="input-group-text" id="addon-wrapping">Verified</span>
+      <span class="input-group-text" id="addon-wrapping">Product Verified</span>
     </div>
     <div class="input-group-text">
-      <input type="checkbox">
+      <input type="checkbox"
+      <?php 
+        if($productVerifyStatus==1){
+          echo "checked";
+        }
+      ?>
+      >
     </div>
   </div>
 
@@ -149,35 +193,43 @@
     <div class="input-group-prepend">
       <span class="input-group-text" id="addon-wrapping">Farmer ID</span>
     </div>
-    <input type="text" class="form-control" placeholder="0" aria-label="Username" aria-describedby="addon-wrapping" disabled="true">
+    <input type="text" class="form-control" placeholder="0" aria-label="Username" aria-describedby="addon-wrapping" disabled="true" value="<?php echo $farmerId ?>">
   </div>
 
   <div class="input-group flex-nowrap">
     <div class="input-group-prepend">
       <span class="input-group-text" id="addon-wrapping">Farmer Name</span>
     </div>
-    <input type="text" class="form-control" placeholder="0" aria-label="Username" aria-describedby="addon-wrapping" disabled="true">
+    <input type="text" class="form-control" placeholder="0" aria-label="Username" aria-describedby="addon-wrapping" disabled="true" value="<?php echo $farmerName ?>">
   </div>
 
   <div class="input-group flex-nowrap">
     <div class="input-group-prepend">
       <span class="input-group-text" id="addon-wrapping">Farmer Phone</span>
     </div>
-    <input type="text" class="form-control" placeholder="0" aria-label="Username" aria-describedby="addon-wrapping" disabled="true">
+    <input type="text" class="form-control" placeholder="0" aria-label="Username" aria-describedby="addon-wrapping" disabled="true" value="<?php echo $farmerPhone ?>">
   </div>
 
   <div class="input-group flex-nowrap">
     <div class="input-group-prepend">
       <span class="input-group-text" id="addon-wrapping">Location</span>
     </div>
-    <input type="text" class="form-control" placeholder="0" aria-label="Username" aria-describedby="addon-wrapping" disabled="true">
+    <input type="text" class="form-control" placeholder="0" aria-label="Username" aria-describedby="addon-wrapping" disabled="true" value="<?php echo $farmerLocation ?>">
   </div>
 
   <div class="input-group flex-nowrap">
     <div class="input-group-prepend">
-      <span class="input-group-text" id="addon-wrapping">Verification status</span>
+      <span class="input-group-text" id="addon-wrapping">Farmer Verified</span>
     </div>
-    <input type="text" class="form-control" placeholder="0" aria-label="Username" aria-describedby="addon-wrapping" disabled="true">
+    <div class="input-group-text">
+      <input type="checkbox" disabled="true"
+      <?php 
+        if($farmerVerifyStatus==1){
+          echo "checked";
+        }
+      ?>
+      >
+    </div>
   </div>
 
 </div>

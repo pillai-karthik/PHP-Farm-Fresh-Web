@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2020 at 06:06 AM
+-- Generation Time: Jan 28, 2020 at 04:47 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -100,7 +100,8 @@ INSERT INTO `farmers` (`id`, `phone`, `password`, `name`, `location`, `verified`
 (66, '+918104140845', '38166', 'Karan Sinha ', 'Unavailable', 0),
 (67, '+918234234456', '26127', 'Meenamma ', 'Unavailable', 0),
 (68, '+918234234234', '61276', 'Sharukh Khan ', 'Unavailable', 0),
-(72, '+919599587014', '45728', 'Parth ', '', 0);
+(72, '+919599587014', '45728', 'Parth ', '', 0),
+(75, '+917045662119', '66419', 'Vijayadharini ', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -114,6 +115,7 @@ CREATE TABLE `products` (
   `productname` text NOT NULL,
   `quantityinkg` text NOT NULL,
   `priceperkg` text NOT NULL,
+  `grade` text DEFAULT NULL,
   `verified` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -121,18 +123,19 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `farmerid`, `productname`, `quantityinkg`, `priceperkg`, `verified`) VALUES
-(35, 55, 'Onion', '35', '300', 0),
-(36, 58, 'Cabbage', '2', '30', 0),
-(37, 55, 'Apple', '12', '180', 0),
-(38, 58, 'Rice', '23', '56', 0),
-(39, 55, 'Carrot', '8', '24', 0),
-(40, 62, 'Orange', '14', '80', 0),
-(41, 66, 'Tomato', '18', '24', 0),
-(42, 66, 'Wheat', '8', '42', 0),
-(43, 67, 'Corn', '18', '30', 0),
-(44, 67, 'Ladyfinger', '5', '32', 0),
-(46, 68, 'Broccoli', '5', '23', 0);
+INSERT INTO `products` (`id`, `farmerid`, `productname`, `quantityinkg`, `priceperkg`, `grade`, `verified`) VALUES
+(35, 55, 'Onion', '35', '300', NULL, 0),
+(36, 58, 'Cabbage', '2', '30', NULL, 0),
+(37, 55, 'Apple', '12', '180', NULL, 0),
+(38, 58, 'Rice', '23', '56', NULL, 0),
+(39, 55, 'Carrot', '8', '24', NULL, 0),
+(40, 62, 'Orange', '14', '80', NULL, 0),
+(41, 66, 'Tomato', '18', '24', NULL, 0),
+(42, 66, 'Wheat', '8', '42', NULL, 0),
+(43, 67, 'Corn', '18', '30', NULL, 0),
+(44, 67, 'Ladyfinger', '5', '32', NULL, 0),
+(46, 68, 'Broccoli', '5', '23', NULL, 0),
+(56, 75, 'Apple', '5', '180', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -182,13 +185,13 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `farmers`
 --
 ALTER TABLE `farmers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
