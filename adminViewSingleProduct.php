@@ -5,8 +5,41 @@
     header("Location: loginAdministrator.php");
   }
 
-  if (!isset($_GET['productid'])) {
+  if (!isset($_GET['productid']) AND !isset($_GET['updateStatus'])) {
     header("Location: adminPanel.php?toview=allproducts");
+  }
+
+
+  if(isset($_GET['updateStatus'])){
+
+    $productId=$_GET['productid'];
+    $productName=$_GET['productNameInput'];
+    $productQuantity=$_GET['productQuantityInput'];
+    $productPrice=$_GET['productPriceInput'];
+    $productGrade=$_GET['productGradeInput'];
+    $productVerified=0;
+
+    if(isset($_GET['productVerifiedInput'])){
+      $productVerified=1;
+    }
+    
+    include 'dataBaseConstants.php';
+    $link=mysqli_connect('localhost',$user,$pass,$db);
+
+    if(mysqli_connect_error()){
+      $error="There was an error connecting to DB!";
+    }else{
+      //CONNECTED TO DB SUCCESFULLY
+      $query="UPDATE products SET productname='$productName', quantityinkg=$productQuantity, priceperkg=$productPrice, grade='$productGrade', verified=$productVerified WHERE id=$productId";
+      if(mysqli_query($link,$query)){
+          //echo "Record updated successfully";
+      } else {
+          //echo "Error updating record: " . mysqli_error($link);
+      }
+
+    }
+
+
   }
 
 ?>
@@ -108,7 +141,7 @@
     $productGrade=$row['grade'];
     $productVerifyStatus=$row['verified'];
 
-    $queryForFarmer="SELECT * FROM farmers WHERE id=".$farmerId;
+    $queryForFarmer="SELECT * FROM farmers WHERE id=$farmerId";
     $resultForFarmer=mysqli_query($link,$queryForFarmer);
 
     $rowForFarmer=mysqli_fetch_array($resultForFarmer);
@@ -119,7 +152,6 @@
     $farmerVerifyStatus=$rowForFarmer['verified'];
 
   }
-
 
 ?>
 
@@ -132,40 +164,41 @@
     <img src="productImages/<?php echo $productName ?>.png" class="rounded productImage" alt="...">
   </div>
 
+<form method="GET" action="adminViewSingleProduct.php">
+
   <div class="input-group flex-nowrap">
     <div class="input-group-prepend">
       <span class="input-group-text" id="addon-wrapping">Product ID</span>
     </div>
-    <input type="text" class="form-control" placeholder="0" aria-label="Username" aria-describedby="addon-wrapping" disabled="true" value="<?php echo $productId ?>">
+    <input type="text" class="form-control" placeholder="0" readonly="readonly" value="<?php echo $productId ?>" name="productid">
   </div>
 
   <div class="input-group flex-nowrap">
     <div class="input-group-prepend">
       <span class="input-group-text" id="addon-wrapping">Product Name</span>
     </div>
-    <input type="text" class="form-control" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="<?php echo $productName ?>">
+    <input type="text" class="form-control" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="<?php echo $productName ?>" name="productNameInput">
   </div>
 
   <div class="input-group flex-nowrap">
     <div class="input-group-prepend">
       <span class="input-group-text" id="addon-wrapping">Quantity (Kgs)</span>
     </div>
-    <input type="text" class="form-control" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="<?php echo $quantityInKg ?>">
+    <input type="text" class="form-control" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="<?php echo $quantityInKg ?>" name="productQuantityInput">
   </div>
 
   <div class="input-group flex-nowrap">
     <div class="input-group-prepend">
       <span class="input-group-text" id="addon-wrapping">Price per Kg</span>
     </div>
-    <input type="text" class="form-control" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="<?php echo $pricePerKg ?>">
+    <input type="text" class="form-control" placeholder="Product Name" aria-label="Username" aria-describedby="addon-wrapping" value="<?php echo $pricePerKg ?>" name="productPriceInput">
   </div>
 
   <div class="input-group flex-nowrap">
     <div class="input-group-prepend">
       <span class="input-group-text" id="addon-wrapping">Grade</span>
     </div>
-    <input type="text" class="form-control" placeholder="Null" aria-label="Username" aria-describedby="addon-wrapping" value="<?php echo $productGrade ?>">
-
+    <input type="text" class="form-control" placeholder="Null" aria-label="Username" aria-describedby="addon-wrapping" value="<?php echo $productGrade ?>" name="productGradeInput">
   </div>
   
 
@@ -174,7 +207,7 @@
       <span class="input-group-text" id="addon-wrapping">Product Verified</span>
     </div>
     <div class="input-group-text">
-      <input type="checkbox"
+      <input type="checkbox" name="productVerifiedInput" value="1"
       <?php 
         if($productVerifyStatus==1){
           echo "checked";
@@ -184,7 +217,10 @@
     </div>
   </div>
 
-  <button type="button" class="btn btn-success">Update</button>
+  <input type="hidden" name="updateStatus" value="1">
+
+  <input type="submit" class="btn btn-success" name="Update">
+</form>
 
 
   <h3><u>Farmer's details :</u></h3>
