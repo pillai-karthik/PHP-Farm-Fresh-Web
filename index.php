@@ -62,21 +62,33 @@
 
               <?php
                 if(!isset($_SESSION['customerName']) AND !isset($_SESSION['vendorName'])){
-                  $str="<li class=\"nav-item\"><a href=\"registerCustomer.php\" class=\"nav-link\" >Register</a></li>
+                  $str='
 
-                      <li class=\"nav-item submenu dropdown\">
-                        <a href=\"#\" class=\"nav-link dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\"
-                            aria-expanded=\"false\">Login</a>
-                        <ul class=\"dropdown-menu\">
-                          <li class=\"nav-item\"><a class=\"nav-link\" href=\"loginCustomer.php\">Customer Login</a></li>
-                          <li class=\"nav-item\"><a class=\"nav-link\" href=\"loginVendor.php\">Vendor Login</a></li>
-                          <li class=\"nav-item\"><a class=\"nav-link\" href=\"loginFarmer.php\">Farmer Login</a></li>
-                          <li class=\"nav-item\"><a class=\"nav-link\" href=\"loginAdministrator.php\">Admin Login</a></li>
+                    <li class="nav-item submenu dropdown">
+                      <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Register</a>
+                        <ul class="dropdown-menu">
+                          <li class="nav-item"><a class="nav-link" href="registerCustomer.php"> Customer</a></li>
+                          <li class="nav-item"><a class="nav-link" href="registerVendor.php">Vendor</a></li>
                         </ul>
-                      </li>";
+                    </li>
+
+                      <li class="nav-item submenu dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false">Login</a>
+                        <ul class="dropdown-menu">
+                          <li class="nav-item"><a class="nav-link" href="loginCustomer.php">Customer Login</a></li>
+                          <li class="nav-item"><a class="nav-link" href="loginVendor.php">Vendor Login</a></li>
+                          <li class="nav-item"><a class="nav-link" href="loginFarmer.php">Farmer Login</a></li>
+                          <li class="nav-item"><a class="nav-link" href="loginAdministrator.php">Admin Login</a></li>
+                        </ul>
+                      </li>
+
+                      ';
                   echo $str;
                 } 
               ?>
+
+              
 
               <li class="nav-item"><a class="nav-link" href="">Contact</a></li>
 
