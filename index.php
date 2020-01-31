@@ -45,7 +45,7 @@
 
           <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav justify-content-end">
-              <li class="nav-item active"><a class="nav-link" >Home</a></li> 
+              <li class="nav-item active"><a class="nav-link" href="">Home</a></li> 
               <li class="nav-item"><a href="productsPage.php" class="nav-link" >Products</a></li> 
               <li class="nav-item"><a href="#review-div" class="nav-link" >Reviews</a></li>
 
