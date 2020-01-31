@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2020 at 01:42 PM
+-- Generation Time: Jan 31, 2020 at 08:26 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -77,7 +77,7 @@ INSERT INTO `customers` (`id`, `phone`, `name`, `password`, `location`, `gender`
 (16, '+916548637687', 'Shubham Pal', '123', 'Unavailable', 'Male', 0),
 (17, '+919736584657', 'Naveen Polishetty', '123', 'Unavailable', 'Male', 0),
 (18, '+917657483564', 'Karan Johar', '123', 'Unavailable', 'Male', 0),
-(19, '+91123456789', 'Karthik Pillai', '123', 'Unavailable', 'Male', 0);
+(19, '+91123456789', 'Karthik customer', '123', 'Unavailable', 'Male', 0);
 
 -- --------------------------------------------------------
 
@@ -107,7 +107,7 @@ INSERT INTO `farmers` (`id`, `phone`, `password`, `name`, `location`, `verified`
 (62, '+919372949986', '68194', 'Mohnish Singh ', 'Unavailable', 0),
 (66, '+918104140845', '38166', 'Karan Sinha ', 'Unavailable', 0),
 (67, '+918234234456', '26127', 'Meenamma ', 'Unavailable', 0),
-(68, '+918234234234', '61276', 'Sharukh Khan ', 'Unavailable', 0),
+(68, '+91123456789', '123', 'Sharukh Khan ', 'Unavailable', 0),
 (72, '+919599587014', '45728', 'Parth ', '', 0),
 (75, '+917045662119', '66419', 'Vijayadharini ', NULL, 1);
 
@@ -126,7 +126,8 @@ CREATE TABLE IF NOT EXISTS `products` (
   `priceperkg` text NOT NULL,
   `grade` text DEFAULT NULL,
   `verified` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`,`farmerid`) USING BTREE,
+  KEY `farmerid` (`farmerid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
 
 --
@@ -134,18 +135,62 @@ CREATE TABLE IF NOT EXISTS `products` (
 --
 
 INSERT INTO `products` (`id`, `farmerid`, `productname`, `quantityinkg`, `priceperkg`, `grade`, `verified`) VALUES
-(35, 55, 'Onion', '35', '300', 'A', 1),
+(35, 55, 'Onion', '35', '300', 'A', 0),
 (36, 58, 'Cabbage', '2', '30', NULL, 0),
 (37, 55, 'Apple', '12', '180', NULL, 0),
 (38, 58, 'Rice', '23', '56', NULL, 0),
 (39, 55, 'Carrot', '8', '24', 'D', 1),
-(40, 62, 'Orange', '14', '80', NULL, 0),
-(41, 66, 'Tomato', '18', '24', NULL, 0),
-(42, 66, 'Wheat', '8', '42', NULL, 0),
-(43, 67, 'Corn', '18', '30', NULL, 0),
+(40, 62, 'Orange', '14', '80', '', 1),
+(41, 66, 'Tomato', '18', '24', 'A', 1),
+(42, 66, 'Wheat', '8', '42', 'D', 0),
+(43, 67, 'Corn', '18', '30', '', 1),
 (44, 67, 'Ladyfinger', '5', '37', 'B', 1),
 (46, 68, 'Broccoli', '5', '23', 'C', 1),
 (56, 75, 'Apple', '5', '180', 'A', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendors`
+--
+
+DROP TABLE IF EXISTS `vendors`;
+CREATE TABLE IF NOT EXISTS `vendors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `phone` text DEFAULT NULL,
+  `name` text DEFAULT NULL,
+  `password` text DEFAULT NULL,
+  `location` text DEFAULT NULL,
+  `gender` text DEFAULT NULL,
+  `verified` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `vendors`
+--
+
+INSERT INTO `vendors` (`id`, `phone`, `name`, `password`, `location`, `gender`, `verified`) VALUES
+(12, '+919574926587', 'Satyam Yadav', '123', 'Unavailable', 'Male', 0),
+(13, '+919865285684', 'Mohit Saini', '123', 'Unavailable', 'Male', 0),
+(14, '+917836448567', 'Siddhant Mohite', '123', 'Unavailable', 'Male', 0),
+(15, '+917845578474', 'Drushti Parab', '123', 'Unavailable', 'Male', 0),
+(16, '+916548637687', 'Shubham Pal', '123', 'Unavailable', 'Male', 0),
+(17, '+919736584657', 'Naveen Polishetty', '123', 'Unavailable', 'Male', 0),
+(18, '+917657483564', 'Karan Johar', '123', 'Unavailable', 'Male', 0),
+(19, '+91123456789', 'Karthik vendor', '1234', 'Unavailable', 'Male', 0),
+(20, '+911234567890', 'Karthik', '12345', NULL, 'Male', 0),
+(21, '+911212121212', 'Karan', '1212', NULL, 'Male', 0);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`farmerid`) REFERENCES `farmers` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
