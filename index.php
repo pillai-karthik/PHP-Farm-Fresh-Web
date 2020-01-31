@@ -46,7 +46,18 @@
           <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav justify-content-end">
               <li class="nav-item active"><a class="nav-link" href="">Home</a></li> 
-              <li class="nav-item"><a href="productsPage.php" class="nav-link" >Products</a></li> 
+
+              <?php
+              if(isset($_SESSION['customerName'])){
+                $str="<li class=\"nav-item\"><a href=\"productsPageForCustomer.php\" class=\"nav-link\" >Products</a></li>";
+                echo $str;
+              }elseif(isset($_SESSION['vendorName'])){
+                $str="<li class=\"nav-item\"><a href=\"productsPageForVendor.php\" class=\"nav-link\" >Products</a></li>";
+                echo $str;
+              } 
+               
+              ?>
+
               <li class="nav-item"><a href="#review-div" class="nav-link" >Reviews</a></li>
 
               <?php

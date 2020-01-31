@@ -1,7 +1,7 @@
 <?php
   session_start();
 
-  if(!isset($_SESSION['customerName'])){
+  if(!isset($_SESSION['vendorName'])){
     header("Location: loginCustomer.php");
   }
 ?>
@@ -23,7 +23,7 @@
 
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="vendors/Product-page-list/style.css">
-  <link rel="stylesheet" type="text/css" href="productsPage.css">
+  <link rel="stylesheet" type="text/css" href="productsPageForVendor.css">
   <link rel="stylesheet" type="text/css" href="vendors/fontawesome/css/all.min.css">
 
   <script>
@@ -72,7 +72,7 @@
             <ul class="nav navbar-nav menu_nav justify-content-end">
               <li class="nav-item"><a href="shoppingCart.php" class="nav-link" >My Cart</a></li> 
               <li class="nav-item"><a href="index.php" class="nav-link" >Home</a></li> 
-              <li class="nav-item active"><a href="productsPage.php" class="nav-link" >Products</a></li> 
+              <li class="nav-item active"><a href="productsPageForCustomer.php" class="nav-link" >Products</a></li> 
 
               <?php
                 if(!isset($_SESSION['customerName'])){

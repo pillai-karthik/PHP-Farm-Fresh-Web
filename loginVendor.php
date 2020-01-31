@@ -25,7 +25,6 @@
                     $_SESSION['vendorPhone']=$row['phone'];
                     $_SESSION['vendorName']=$row['name'];
                     $_SESSION['vendorGender']=$row['gender'];
-
                     
                     header('Location: index.php');
 
