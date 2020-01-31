@@ -32,6 +32,10 @@
               $str="<p class=\"navbar-brand logo_h\"><b><h5>HI, ".strtoupper($_SESSION['customerName']).".</h5></b></p>";
               echo $str;
             } 
+            if(isset($_SESSION['vendorName'])){
+              $str="<p class=\"navbar-brand logo_h\"><b><h5>HI, ".strtoupper($_SESSION['vendorName']).".</h5></b></p>";
+              echo $str;
+            } 
           ?>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
@@ -46,7 +50,7 @@
               <li class="nav-item"><a href="#review-div" class="nav-link" >Reviews</a></li>
 
               <?php
-                if(!isset($_SESSION['customerName'])){
+                if(!isset($_SESSION['customerName']) AND !isset($_SESSION['vendorName'])){
                   $str="<li class=\"nav-item\"><a href=\"registerCustomer.php\" class=\"nav-link\" >Register</a></li>
 
                       <li class=\"nav-item submenu dropdown\">
@@ -54,6 +58,7 @@
                             aria-expanded=\"false\">Login</a>
                         <ul class=\"dropdown-menu\">
                           <li class=\"nav-item\"><a class=\"nav-link\" href=\"loginCustomer.php\">Customer Login</a></li>
+                          <li class=\"nav-item\"><a class=\"nav-link\" href=\"loginVendor.php\">Vendor Login</a></li>
                           <li class=\"nav-item\"><a class=\"nav-link\" href=\"loginFarmer.php\">Farmer Login</a></li>
                           <li class=\"nav-item\"><a class=\"nav-link\" href=\"loginAdministrator.php\">Admin Login</a></li>
                         </ul>
@@ -65,7 +70,7 @@
               <li class="nav-item"><a class="nav-link" href="">Contact</a></li>
 
               <?php
-                if(isset($_SESSION['customerName'])){
+                if(isset($_SESSION['customerName']) OR isset($_SESSION['vendorName'])){
                   $str="<li class=\"nav-item\"><a class=\"nav-link\" href=\"logoutClicked.php\">Logout</a></li>";
                   echo $str;
                 } 

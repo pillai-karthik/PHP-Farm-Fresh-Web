@@ -1,0 +1,122 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: url(assets/loginCustomerBg.jpg);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    font-family: 'Oxygen', sans-serif;
+    letter-spacing: 1px;
+}
+.signup-box{
+    width: 700px;
+    height: 420px;
+    background: rgba(19, 89, 76, 0.4);
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    border-radius: 3px;
+}
+.signup-box .signup-form,
+.signup-box .form-c{
+    position: relative;
+    width: 50%;
+    height: 420px;
+    float: right;
+    box-sizing: border-box;
+}
+.signup-box .form-c h1,
+.signup-box .form-c p,
+.signup-box .form-c a{
+    padding-left: 10px;
+    padding-top: 20px;
+    color: #fff;
+}
+.signup-box .form-c a{
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    background: #14594C;
+    border-radius: 25px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        
+    }
+.signup-box .signup-form{
+    background: #fff;
+    height: 470px;
+    width: 50%;
+    top: -25px;
+    box-shadow: 20px 15px 15px rgba(0,0,0,0.2);
+    border-radius: 3px;
+    padding: 10px 30px;
+}
+
+#text{
+    display: block;
+    width: 80%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 15px;
+    transition: border-color .10s ease, box-shadow .10s ease;
+}
+#text:focus, #text:hover{
+    border: 2px solid #14594C;
+} 
+.signup-box .signup-form input[type = "submit"]{
+    color: #fff;
+    background: #A2A638;
+    font-size: 16px;
+    margin-top: 10px;
+    padding: 10px;
+    transition: 0.5s;
+    width: 50%;
+    transition: border-color .10s ease, box-shadow .10s ease;
+    border-radius: 25px;
+    outline: none;
+    
+}
+.signup-box .signup-form input[type = "submit"]:hover{
+    background: #14594C; 
+    border: 2px solid #14594C;
+}
+.signup-box .signup-form .img{
+    position: absolute;
+    left: 85%;
+    top: 20px;
+    display: inline-block;
+}
+.field-wrap {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+#custom-button{
+    padding: 10px;
+    color: white;
+    background-color: #038C7F;
+    border: 1px solid #14594C;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#custom-button:hover{
+    background-color: #14594C;
+}
+
+#custom-text{
+    color: #aaa;
+    font-size: 14;
+}
+
+#errorPara{
+    color: red;
+    font-weight: bold;
+    font-size: 14px;
+}
