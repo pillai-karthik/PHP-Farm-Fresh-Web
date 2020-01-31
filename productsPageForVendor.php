@@ -50,7 +50,7 @@
           <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav justify-content-end">
               <li class="nav-item"><a href="index.php" class="nav-link" >Home</a></li> 
-              <li class="nav-item active"><a href="productsPageForCustomer.php" class="nav-link" >Products</a></li> 
+              <li class="nav-item active"><a href="productsPageForVendor.php" class="nav-link" >Products</a></li> 
 
               <?php
                 if(!isset($_SESSION['vendorName'])){
@@ -131,7 +131,7 @@
                       <h5 class=\"card-title\">$productName</h5>
                       <h6 class=\"card-title\">Rs.$pricePerKg/kg</h6>
                       <p class=\"card-text\">Sold By, $farmerName.</p>
-                      <a href=\"loginCustomer.php\"> 
+                      <a href=\"shoppingCartForVendor.php\"> 
                         <button type=\"button\" class=\"btn btn-success btn-lg btn-block\">Order Now</button>
                       </a>
                     </div>
