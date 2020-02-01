@@ -180,18 +180,18 @@ if (!isset($_SESSION['vendorName'])) {
                   <form action="shoppingCartForVendor.php" method="post">
 
                     <h3 class="product-name"></h3>
-                    <h6 class=''>Rs. <span class="product-cost"></span> /kg</h6>
+                    <h6 class=''>Rs. <span class="product-cost"></span>/kg</h6>
                     <p class='sold-by mb-5'></p>
 
                     <div class="input-group mb-3 plusminusgroup">
                       <div class="input-group-prepend">
                         <span class="input-group-text">Qty (Kgs)</span>
-                        <input type="number" class="form-control quantity" value="" min="100" required>
+                        <input type="number" class="form-control quantity" value="" min="10" step="10" required>
                         <input type="hidden" name="product_id" required>
                         <input type="hidden" name="product_quantity" required>
                       </div>
                     </div>
-                    <h3 class="mt-5 mb-0">Total Cost: Rs. <span class="calculated-cost"></span> /-</h3>
+                    <h3 class="mt-5 mb-0">Total Cost: Rs. <span class="calculated-cost"></span></h3>
                     <small>*This is the product cost not including delivery charges</small>
 
                     <input type="submit" class="btn btn-success btn-sm mt-3" name="proceed_order" value="Proceed">
@@ -210,6 +210,8 @@ if (!isset($_SESSION['vendorName'])) {
   </div>
 
   <script>
+    
+    $('#product_modal .calculated-cost').text(0);//Added so that the initial value be 0
     $(document).ready(function() {
       $("#product_search").on("keyup", function() {
         var value = $(this).val().toLowerCase();
