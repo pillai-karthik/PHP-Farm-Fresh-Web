@@ -186,7 +186,7 @@ if (!isset($_SESSION['vendorName'])) {
                     <div class="input-group mb-3 plusminusgroup">
                       <div class="input-group-prepend">
                         <span class="input-group-text">Qty (Kgs)</span>
-                        <input type="number" class="form-control quantity" value="" min="10" step="10" required>
+                        <input type="number" class="form-control quantity" value="" min="10" step="5" max="30000" required>
                         <input type="hidden" name="product_id" required>
                         <input type="hidden" name="product_quantity" required>
                       </div>
