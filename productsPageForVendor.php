@@ -35,6 +35,13 @@ if (!isset($_SESSION['vendorName'])) {
     .card {
       box-shadow: 5px 5px 16px #eee;
     }
+
+    .modal-header {
+      background: #7676ff;
+      color: #fff;
+      padding: .5rem 1rem;
+      margin: -1px;
+    }
   </style>
 </head>
 
@@ -100,66 +107,103 @@ if (!isset($_SESSION['vendorName'])) {
   </header>
   <!--================Header Menu Area =================-->
 
+  <?php include 'dataBaseConstants.php';
+  $link = mysqli_connect('localhost', $user, $pass, $db);
+  $product_list = "";
+
+  if (mysqli_connect_error()) {
+    $error = "There was an error connecting to DB!";
+  } else {
+    //CONNECTED TO DB SUCCESFULLY
+    $query = "SELECT * FROM products ORDER BY id DESC";
+    $result = mysqli_query($link, $query);
+
+
+    while ($row = mysqli_fetch_array($result)) {
+
+      $productId = $row['id'];
+      $farmerId = $row['farmerid'];
+      $productName = $row['productname'];
+      $quantityInKg = $row['quantityinkg'];
+      $pricePerKg = $row['priceperkg'];
+      $verified = $row['verified'];
+
+      $queryForFarmerName = "SELECT * FROM farmers WHERE id=" . $farmerId;
+      $resultForFarmerName = mysqli_query($link, $queryForFarmerName);
+
+      $farmerName = "Farmer";
+      if (mysqli_num_rows($result) > 0) {
+        $rowForFarmerName = mysqli_fetch_array($resultForFarmerName);
+        $farmerName = $rowForFarmerName['name'];
+      }
+
+      $product_list .= "<div class='col-lg-3 col-md-4 col-sm-6'>
+                          <div class='card' id='$productId'>
+                            <img class='card-img-top' src='productImages/$productName.png' height='220px' alt='Card image cap'>
+                            <div class='card-body'>
+                              <h5 class='card-title product-name'>$productName</h5>
+                              <h6 class='card-title'>Rs.<span class='product-cost'>$pricePerKg</span>/kg</h6>
+                              <p class='card-text sold-by'>Sold By, $farmerName.</p>
+                                <button class='btn btn-success btn-lg btn-block' data-product='" . $productId . "' data-toggle='modal'>Order Now</button>
+                            </div>
+                          </div>  
+                        </div>";
+    }
+  }
+  ?>
 
   <div class="container mb-3">
     <div class="row">
       <div class="form-group col-12">
         <label for="">Search</label>
-        <input type="text" name="" id="product_search" class="form-control" placeholder="" aria-describedby="helpId">
+        <input type="text" id="product_search" class="form-control" placeholder="Enter the product name ..." aria-describedby="helpId">
       </div>
 
-      <?php
+      <!-- The Modal -->
+      <div class="modal fade" id="product_modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
 
-      include 'dataBaseConstants.php';
-      $link = mysqli_connect('localhost', $user, $pass, $db);
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <p class="modal-title h6">Apple</p>
+              <button type="button" class="close text-light" data-dismiss="modal">&times;</button>
+            </div>
 
-      if (mysqli_connect_error()) {
-        $error = "There was an error connecting to DB!";
-      } else {
-        //CONNECTED TO DB SUCCESFULLY
-        $query = "SELECT * FROM products ORDER BY id DESC";
-        $result = mysqli_query($link, $query);
-
-
-        while ($row = mysqli_fetch_array($result)) {
-
-          $productId = $row['id'];
-          $farmerId = $row['farmerid'];
-          $productName = $row['productname'];
-          $quantityInKg = $row['quantityinkg'];
-          $pricePerKg = $row['priceperkg'];
-          $verified = $row['verified'];
-
-          $queryForFarmerName = "SELECT * FROM farmers WHERE id=" . $farmerId;
-          $resultForFarmerName = mysqli_query($link, $queryForFarmerName);
-
-          $farmerName = "Farmer";
-          if (mysqli_num_rows($result) > 0) {
-            $rowForFarmerName = mysqli_fetch_array($resultForFarmerName);
-            $farmerName = $rowForFarmerName['name'];
-          }
-
-          $str = "
-
-                <div class='col-lg-3 col-md-4 col-sm-6'>
-                  <div class='card'>
-                    <img class='card-img-top' src='productImages/$productName.png' height='220px' alt='Card image cap'>
-                    <div class='card-body'>
-                      <h5 class='card-title'>$productName</h5>
-                      <h6 class='card-title'>Rs.$pricePerKg/kg</h6>
-                      <p class='card-text'>Sold By, $farmerName.</p>
-                      <a href='shoppingCartForVendor.php'> 
-                        <button type='button' class='btn btn-success btn-lg btn-block'>Order Now</button>
-                      </a>
-                    </div>
-                  </div>  
+            <!-- Modal body -->
+            <div class="modal-body py-5">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="" height="350px" width="350px" alt="product">
                 </div>
+                <div class="col-md-6">
+                  <form action="" method="post">
 
-            ";
-          echo $str;
-        }
-      }
-      ?>
+                    <h3 class="product-name"></h3>
+                    <h6 class=''>Rs. <span class="product-cost"></span> /kg</h6>
+                    <p class='sold-by mb-5'></p>
+
+                    <div class="input-group mb-3 plusminusgroup">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Qty (Kgs)</span>
+                        <input type="number" class="form-control quantity" value="" min="100" required>
+                      </div>
+                    </div>
+                    <h3 class="mt-5 mb-0">Total Cost: Rs. <span class="calculated-cost"></span> /-</h3>
+                    <small>*This is the product cost not including delivery charges</small>
+
+                    <input type="submit" class="btn btn-success btn-sm mt-3" name="proceed_order" disabled value="Proceed">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <?php echo $product_list ?>
+
+
     </div>
   </div>
 
@@ -170,6 +214,30 @@ if (!isset($_SESSION['vendorName'])) {
         $(".row .col-md-4").filter(function() {
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
+      });
+      $('.quantity').keyup(function() {
+        var quantity = $(this).val();
+        var product_cost = $('#product_modal .product-cost').text();
+        $('#product_modal .calculated-cost').text(Number(quantity) * Number(product_cost));
+        $('#product_modal .btn').removeAttr('disabled');
+      });
+
+
+      $('[data-product]').click(function() {
+        var product_id = $(this).attr('data-product');
+        var product_name = $('#' + product_id + ' .product-name').text();
+        var product_cost = $('#' + product_id + ' .product-cost').text();
+        var sold_by = $('#' + product_id + ' .sold-by').text();
+        var product_image = $('#' + product_id + ' img').attr('src');
+        $('#product_modal .modal-title').text(product_name);
+        $('#product_modal .product-name').text(product_name);
+        $('#product_modal .product-cost').text(product_cost);
+        $('#product_modal .sold-by').text(sold_by);
+        $('#product_modal img').attr('src', product_image);
+        $('#product_modal').modal('show');
+
+        // console.log(product_name);
+
       });
     });
   </script>
