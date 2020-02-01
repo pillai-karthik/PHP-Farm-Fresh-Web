@@ -177,7 +177,7 @@ if (!isset($_SESSION['vendorName'])) {
                   <img src="" height="350px" width="350px" alt="product">
                 </div>
                 <div class="col-md-6">
-                  <form action="" method="post">
+                  <form action="shoppingCartForVendor.php" method="post">
 
                     <h3 class="product-name"></h3>
                     <h6 class=''>Rs. <span class="product-cost"></span> /kg</h6>
@@ -187,12 +187,14 @@ if (!isset($_SESSION['vendorName'])) {
                       <div class="input-group-prepend">
                         <span class="input-group-text">Qty (Kgs)</span>
                         <input type="number" class="form-control quantity" value="" min="100" required>
+                        <input type="hidden" name="product_id" required>
+                        <input type="hidden" name="product_quantity" required>
                       </div>
                     </div>
                     <h3 class="mt-5 mb-0">Total Cost: Rs. <span class="calculated-cost"></span> /-</h3>
                     <small>*This is the product cost not including delivery charges</small>
 
-                    <input type="submit" class="btn btn-success btn-sm mt-3" name="proceed_order" disabled value="Proceed">
+                    <input type="submit" class="btn btn-success btn-sm mt-3" name="proceed_order" value="Proceed">
                   </form>
                 </div>
               </div>
@@ -219,7 +221,7 @@ if (!isset($_SESSION['vendorName'])) {
         var quantity = $(this).val();
         var product_cost = $('#product_modal .product-cost').text();
         $('#product_modal .calculated-cost').text(Number(quantity) * Number(product_cost));
-        $('#product_modal .btn').removeAttr('disabled');
+        $('[name="product_quantity"]').val(quantity);
       });
 
 
@@ -229,6 +231,8 @@ if (!isset($_SESSION['vendorName'])) {
         var product_cost = $('#' + product_id + ' .product-cost').text();
         var sold_by = $('#' + product_id + ' .sold-by').text();
         var product_image = $('#' + product_id + ' img').attr('src');
+        
+        $('[name="product_id"]').val(product_id);
         $('#product_modal .modal-title').text(product_name);
         $('#product_modal .product-name').text(product_name);
         $('#product_modal .product-cost').text(product_cost);
